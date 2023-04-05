@@ -1,0 +1,22 @@
+{
+    "id": "my_custom_model",
+    "name": "My Custom Model",
+    "description": "A custom text classification model",
+    "pipeline_tag": "text-classification",
+    "model": {
+      "architecture": "bert",
+      "num_labels": 3,
+      "id2label": {
+        "0": "India",
+        "1": "Global",
+        "2": "Sports",
+        "3":"Tech"
+      },
+      "label2id": {
+        "India": 0,
+        "Global": 1,
+        "Sports": 2,
+        "Tech" : 3
+      }
+    }
+  }
