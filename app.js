@@ -181,6 +181,6 @@ const options = {
   cert: fs.readFileSync('/etc/letsencrypt/live/app.ajrakhhouse.com/fullchain.pem')
 }
 
-https.createServer(options, app).listen(80, console.log(`server runs on port 80`))
+https.createServer(options, app).listen(4000, console.log(`server runs on port 80`))
 
 // app.listen(4000);
