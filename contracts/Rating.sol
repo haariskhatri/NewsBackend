@@ -16,10 +16,10 @@ contract rating is ReentrancyGuard {
     address public manager;
     address public bank = 0xE6CeDCA3F9A8710e22d64e82E383520776470a05;
     uint private Reward;
-    uint[] requests;
+    uint[] public requests;
     
 
-    constructor(address _bank) {
+    constructor() {
         manager = msg.sender;
         Reward = 30 ether;
     }
@@ -126,7 +126,7 @@ contract rating is ReentrancyGuard {
         user.balance += reward;
         order.transactionStatus = Status.APPROVED;
 
-        for(uint i = 0 ; i < requests.length; i++){
+        for(uint i = 0 ; i < requests.length -1; i++){
              requests[i] = requests[i+1];
          }
         requests.pop();
