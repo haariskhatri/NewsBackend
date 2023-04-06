@@ -9,7 +9,6 @@ import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 
 contract ADC is ERC20, ERC20Burnable, Ownable {
 
-
   
   constructor() ERC20("DigiRupee", "DNR") {
     _mint(msg.sender, 1000 * 10 ** decimals());
