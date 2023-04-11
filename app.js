@@ -11,6 +11,8 @@ const cheerio = require("cheerio");
 const mongoose = require("mongoose");
 const ethers = require("ethers");
 
+const cors = require('cors');
+
 const key = "56fae8129c16de3f46e82e0347cf6c157c2bf6de7454f1bf46ee7d8b1b50092f";
 
 const NewsModel = require("./collections/globals");
@@ -40,6 +42,10 @@ const { network } = require("hardhat");
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use("/admin", adminRoutes.routes);
+
+app.use(cors({
+  origin: '*'
+}));
 
 app.get("/index", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "index.html"));
@@ -113,6 +119,15 @@ else{
 
 });
 
+app.post('/verify' , async(req,res)=>{
+    
+  const message = req.body.message;
+  console.log(req.body)
+  const signature = req.body.signature;
+  const verified = ethers.utils.verifyMessage(message,signature);
+  return verified;
+})
+
 async function summarize(data) {
   const response = await fetch(
     "https://api-inference.huggingface.co/models/facebook/bart-large-cnn",
@@ -146,7 +161,6 @@ async function getCategory(data) {
   return result;
 }
 
-async function checking(data) {}
 
 async function check(data) {
   // const response = await fetch(
