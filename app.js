@@ -12,7 +12,7 @@ const mongoose = require("mongoose");
 const ethers = require("ethers");
 
 const cors = require('cors');
-const crypro = require('crypto');
+const crypto = require('crypto');
 
 const key = "56fae8129c16de3f46e82e0347cf6c157c2bf6de7454f1bf46ee7d8b1b50092f";
 
