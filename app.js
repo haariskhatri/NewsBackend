@@ -64,9 +64,9 @@ app.post('/approved',async (req,res)=>{
   res.send("Approved");
 })
 
-app.post("/article", async (req, res) => {
+app.post("/article/:url", async (req, res) => {
   //const url = "https://www.indiatoday.in/cryptocurrency/story/ftx-founder-bankman-fried-charged-with-paying-forty-million-dollar-bribe-2352755-2023-03-29";
-  const url = req.body.URL;
+  const url = req.params.url;
   const exists = await Rating.urls(url);
  
   if(exists == false){
@@ -121,11 +121,10 @@ else{
 });
 
 
-app.post('/verify' , async(req,res)=>{
-  const message = req.body.message;
-  console.log(req.body
-      )
-  const signature = req.body.signature;
+app.post('/verify/:message/:signature' , async(req,res)=>{
+  const message = req.params.message;
+  console.log(message);
+  const signature = req.params.signature;
   const verified = ethers.utils.verifyMessage(message,signature);
   console.log("Verified : ", verified);
 
@@ -135,6 +134,13 @@ app.post('/verify' , async(req,res)=>{
 app.get('/random',(req,res)=>{
   const number = crypto.randomInt(1000000);
   return res.json(number);
+})
+
+app.get('/news/:category',async(req,res)=>{
+  const category = req.params.category;
+
+  const news = await NewsModel.find({"category": {$in : [category]}})
+ return res.json(news)
 })
 
 async function summarize(data) {
@@ -199,11 +205,11 @@ async function check(data) {
   return result;
 }
 
-const options = {
-  key: fs.readFileSync('/etc/letsencrypt/live/app.ajrakhhouse.com/privkey.pem'),
-  cert: fs.readFileSync('/etc/letsencrypt/live/app.ajrakhhouse.com/fullchain.pem')
-}
+// const options = {
+//   key: fs.readFileSync('/etc/letsencrypt/live/app.ajrakhhouse.com/privkey.pem'),
+//   cert: fs.readFileSync('/etc/letsencrypt/live/app.ajrakhhouse.com/fullchain.pem')
+// }
 
-https.createServer(options, app).listen(4000, console.log(`server runs on port 80`))
+//https.createServer(options, app).listen(4000, console.log(`server runs on port 80`))
 
-// app.listen(4000);
+app.listen(5000);
