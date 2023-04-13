@@ -5,6 +5,7 @@ const fs = require("fs");
 const fetch = require("node-fetch");
 const https = require("https");
 const _ = require("lodash");
+const {encode,decode} = require('url-encode-decode')
 
 const axios = require("axios");
 const cheerio = require("cheerio");
@@ -66,9 +67,10 @@ app.post('/approved',async (req,res)=>{
 
 app.post("/article/:url", async (req, res) => {
   //const url = "https://www.indiatoday.in/cryptocurrency/story/ftx-founder-bankman-fried-charged-with-paying-forty-million-dollar-bribe-2352755-2023-03-29";
-  const url = req.params.url;
+  const url = decode(req.params.url);
+  console.log(url);
   const exists = await Rating.urls(url);
- 
+  
   if(exists == false){
   const result = await axios.get(url).then(async (response) => {
     const html = response.data;
@@ -205,11 +207,11 @@ async function check(data) {
   return result;
 }
 
-// const options = {
-//   key: fs.readFileSync('/etc/letsencrypt/live/app.ajrakhhouse.com/privkey.pem'),
-//   cert: fs.readFileSync('/etc/letsencrypt/live/app.ajrakhhouse.com/fullchain.pem')
-// }
+const options = {
+  key: fs.readFileSync('/etc/letsencrypt/live/app.ajrakhhouse.com/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/app.ajrakhhouse.com/fullchain.pem')
+}
 
-//https.createServer(options, app).listen(4000, console.log(`server runs on port 80`))
+https.createServer(options, app).listen(4000, console.log(`server runs on port 80`))
 
-app.listen(5000);
+//app.listen(5000);
