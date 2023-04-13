@@ -108,7 +108,7 @@ app.post("/article/:url", async (req, res) => {
       image: imgSrc,
     }).save();
     
-    res.json({
+    return res.json({
       text: final[0].summary_text,
       sentiment: sentiment,
       rating: rating,
