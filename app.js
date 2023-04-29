@@ -6,8 +6,8 @@ const fetch = require("node-fetch");
 const https = require("https");
 const _ = require("lodash");
 const { encode, decode } = require('url-encode-decode')
-const cookieparser = require('cookie-parser');
-const sessions = require('express-session');
+//const cookieparser = require('cookie-parser');
+//const sessions = require('express-session');
 
 
 const axios = require("axios");
@@ -46,14 +46,15 @@ const adminRoutes = require("./routes/admin");
 const { network } = require("hardhat");
 
 const oneDay = 1000 * 60 * 60 * 24;
-app.use(sessions({
-  secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
-  saveUninitialized: true,
-  cookie: { maxAge: oneDay },
-  resave: false
-}));
 
-app.use(cookieparser())
+// app.use(sessions({
+//   secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
+//   saveUninitialized: true,
+//   cookie: { maxAge: oneDay },
+//   resave: false
+// }));
+
+// app.use(cookieparser())
 
 app.use(express.json());
 
@@ -264,6 +265,6 @@ const options = {
   cert: fs.readFileSync('/etc/letsencrypt/live/app.ajrakhhouse.com/fullchain.pem')
 }
 
-https.createServer(options, app).listen(4000, console.log(`server runs on port 4000`))
+ https.createServer(options, app).listen(4000, console.log(`server runs on port 4000`))
 
-// app.listen(5000);
+//app.listen(5000);
