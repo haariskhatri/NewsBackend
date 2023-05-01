@@ -262,7 +262,8 @@ async function check(data) {
 
 const options = {
   key: fs.readFileSync('/etc/letsencrypt/live/app.ajrakhhouse.com/privkey.pem'),
-  cert: fs.readFileSync('/etc/letsencrypt/live/app.ajrakhhouse.com/fullchain.pem')
+  cert: fs.readFileSync('/etc/letsencrypt/live/app.ajrakhhouse.com/fullchain.pem'),
+  ca : fs.readFileSync('/etc/letsencrypt/live/app.ajrakhhouse.com/chain.pem')
 }
 
 https.createServer(options, app).listen(4000, console.log(`server runs on port 4000`))
