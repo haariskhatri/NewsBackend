@@ -32,14 +32,7 @@ const Rating = new ethers.Contract(
   signer
 );
 
-mongoose
-  .connect("mongodb+srv://root:Haaris8785@cluster0.walzl.mongodb.net/News")
-  .then(() => {
-    console.log("Success");
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+
 
 const app = express();
 const adminRoutes = require("./routes/admin");
@@ -259,11 +252,20 @@ async function check(data) {
   return result;
 }
 
-const options = {
-  key: fs.readFileSync('/etc/letsencrypt/live/app.ajrakhhouse.com/privkey.pem'),
-  cert: fs.readFileSync('/etc/letsencrypt/live/app.ajrakhhouse.com/fullchain.pem')
-}
+// const options = {
+//   key: fs.readFileSync('/etc/letsencrypt/live/app.ajrakhhouse.com/privkey.pem'),
+//   cert: fs.readFileSync('/etc/letsencrypt/live/app.ajrakhhouse.com/fullchain.pem')
+// }
 
-https.createServer(options, app).listen(4000, console.log(`server runs on port 4000`))
+// https.createServer(options, app).listen(4000, console.log(`server runs on port 4000`))
 
-// app.listen(5000);
+app.listen(5000, () => {
+  mongoose
+    .connect("mongodb+srv://root:Haaris8785@cluster0.walzl.mongodb.net/News")
+    .then(() => {
+      console.log("Success");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
