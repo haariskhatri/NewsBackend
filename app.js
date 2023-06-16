@@ -6,8 +6,8 @@ const fetch = require("node-fetch");
 const https = require("https");
 const _ = require("lodash");
 const { encode, decode } = require('url-encode-decode')
-const cookieparser = require('cookie-parser');
-const sessions = require('express-session');
+//const cookieparser = require('cookie-parser');
+//const sessions = require('express-session');
 
 
 const axios = require("axios");
@@ -39,14 +39,15 @@ const adminRoutes = require("./routes/admin");
 const { network } = require("hardhat");
 
 const oneDay = 1000 * 60 * 60 * 24;
-app.use(sessions({
-  secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
-  saveUninitialized: true,
-  cookie: { maxAge: oneDay },
-  resave: false
-}));
 
-app.use(cookieparser())
+// app.use(sessions({
+//   secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
+//   saveUninitialized: true,
+//   cookie: { maxAge: oneDay },
+//   resave: false
+// }));
+
+// app.use(cookieparser())
 
 app.use(express.json());
 
